@@ -4,6 +4,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
 const dbconnect = require("./data/db");
+require("dotenv").config();
 
 dbconnect();
 

@@ -2,6 +2,10 @@ const Category = require("../models/category");
 const Recipe = require("../models/recipe");
 const categories = require("./categories");
 const recipes = require("./recipes");
+// require("dotenv").config();
+const path = require("path");
+const dotenv = require("dotenv");
+dotenv.config({ path: path.resolve(__dirname, "..", "..", ".env") });
 
 const dbconnect = require("./db");
 
