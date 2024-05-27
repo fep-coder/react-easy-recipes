@@ -1,13 +1,11 @@
 const Category = require("../models/category");
 const Recipe = require("../models/recipe");
-const mongoose = require("mongoose");
 const categories = require("./categories");
 const recipes = require("./recipes");
 
-mongoose
-    .connect("mongodb://localhost:27017/easy-recipes")
-    .then(() => console.log("Connected"))
-    .catch((err) => console.log(err));
+const dbconnect = require("./db");
+
+dbconnect();
 
 async function SeedData() {
     try {

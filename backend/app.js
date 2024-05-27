@@ -3,11 +3,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
+const dbconnect = require("./data/db");
 
-mongoose
-    .connect("mongodb://localhost:27017/easy-recipes")
-    .then(() => console.log("Connected"))
-    .catch((err) => console.log(err));
+dbconnect();
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
