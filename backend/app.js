@@ -8,8 +8,7 @@ require("dotenv").config();
 
 dbconnect();
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const recipesRouter = require("./routes/recipes");
 
 var app = express();
 
@@ -19,7 +18,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/api/recipes", recipesRouter);
 
 module.exports = app;
