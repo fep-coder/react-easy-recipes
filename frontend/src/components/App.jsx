@@ -1,3 +1,5 @@
+import { Outlet } from "react-router-dom";
+
 function App() {
     return (
         <div className="container">
@@ -16,7 +18,9 @@ function App() {
                     <label>Search</label>
                     <input />
                 </div>
-                <div className="col">RecipeList</div>
+                <div className="col">
+                    <Outlet />
+                </div>
             </div>
         </div>
     );
