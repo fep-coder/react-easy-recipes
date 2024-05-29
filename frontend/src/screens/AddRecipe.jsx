@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetCategoriesQuery } from "../slices/categoriesApiSlice";
 import {
     useCreateRecipeMutation,
@@ -14,6 +14,21 @@ function AddRecipe() {
     const [image, setImage] = useState("noimage.jpg");
     const [category, setCategory] = useState("");
     const [difficulty, setDifficulty] = useState("");
+
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [preview, setPreview] = useState(null);
+
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(null);
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(selectedFile);
+        setPreview(objectUrl);
+
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile]);
 
     const { data: categories } = useGetCategoriesQuery();
     const [createRecipe] = useCreateRecipeMutation();
@@ -43,6 +58,7 @@ function AddRecipe() {
     const uploadFileHandler = async (e) => {
         // console.log(e.target.files[0]);
         setImage(e.target.files[0].name);
+        setSelectedFile(e.target.files[0]);
 
         const formData = new FormData();
         formData.append("image", e.target.files[0]);
@@ -93,6 +109,18 @@ function AddRecipe() {
                         type="file"
                         onChange={uploadFileHandler}
                     />
+                    {selectedFile && (
+                        <div className="mt-3">
+                            <img
+                                src={preview}
+                                style={{
+                                    width: "200px",
+                                    height: "200px",
+                                    marginTop: "10px",
+                                }}
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className="mb-3">
                     <label>Category</label>
