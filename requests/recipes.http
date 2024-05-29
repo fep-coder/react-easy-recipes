@@ -1,2 +1,32 @@
 ### GET ALL RECIPES 
 http://localhost:3000/api/recipes
+
+### GET ONE RECIPE 
+http://localhost:3000/api/recipes/665463f1ff4878b583ad0d84
+
+### CREATE ONE RECIPE 
+POST http://localhost:3000/api/recipes
+Content-Type: application/json
+
+{
+    "name": "new recipe",
+    "description": "new recipe description",
+    "body": "new recipe description",
+    "category": "665463f1ff4878b583ad0d51",
+    "difficulty": "easy"
+}
+
+### UPDATE ONE RECIPE 
+PUT http://localhost:3000/api/recipes/6656d708b6d818671e4d0399
+Content-Type: application/json
+
+{
+    "name": "new recipe 2",
+    "description": "new recipe description 2",
+    "body": "new recipe description 2",
+    "category": "665463f1ff4878b583ad0d51",
+    "difficulty": "medium"
+}
+
+### DELETE ONE RECIPE 
+DELETE http://localhost:3000/api/recipes/6656d708b6d818671e4d0399
