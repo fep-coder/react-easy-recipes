@@ -6,6 +6,7 @@ import {
 } from "../slices/recipesApiSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 function AddRecipe() {
     const [name, setName] = useState("");
@@ -32,7 +33,8 @@ function AddRecipe() {
 
     const { data: categories } = useGetCategoriesQuery();
     const [createRecipe] = useCreateRecipeMutation();
-    const [uploadImage] = useUploadImageMutation();
+    const [uploadImage, { isLoading: loadingUpload }] =
+        useUploadImageMutation();
 
     const navigate = useNavigate();
 
@@ -102,13 +104,14 @@ function AddRecipe() {
                         onChange={(e) => setBody(e.target.value)}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="mb-3 position-relative">
                     <label>Image</label>
                     <input
                         className="form-control"
                         type="file"
                         onChange={uploadFileHandler}
                     />
+                    {loadingUpload && <Loader />}
                     {selectedFile && (
                         <div className="mt-3">
                             <img

@@ -1,32 +1,34 @@
+import Loader from "../components/Loader";
 import { useGetRecipesQuery } from "../slices/recipesApiSlice";
 
 function RecipeList() {
     const { data: recipes, error, isLoading } = useGetRecipesQuery();
 
     return (
-        <div className="row">
-            <h1 className="text-center">Browse Recipes</h1>
-
+        <div className="row position-relative">
             {isLoading ? (
-                <p>Loading...</p>
+                <Loader />
             ) : error ? (
                 <p>Something went wrong...</p>
             ) : (
-                recipes.map((recipe) => (
-                    <div className="row mb-3" key={recipe._id}>
-                        <div className="col-4">
-                            <img
-                                className="img-fluid"
-                                src={`/images/${recipe.image}`}
-                                alt={recipe.name}
-                            />
+                <>
+                    <h1 className="text-center">Browse Recipes</h1>
+                    {recipes.map((recipe) => (
+                        <div className="row mb-3" key={recipe._id}>
+                            <div className="col-4">
+                                <img
+                                    className="img-fluid"
+                                    src={`/images/${recipe.image}`}
+                                    alt={recipe.name}
+                                />
+                            </div>
+                            <div className="col-8">
+                                <h5 className="card-title">{recipe.name}</h5>
+                                <p>{recipe.description}</p>
+                            </div>
                         </div>
-                        <div className="col-8">
-                            <h5 className="card-title">{recipe.name}</h5>
-                            <p>{recipe.description}</p>
-                        </div>
-                    </div>
-                ))
+                    ))}
+                </>
             )}
         </div>
     );
