@@ -1,22 +1,26 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function App() {
     return (
-        <div className="container">
+        <div className="container mt-3">
             <div className="row">
                 <div className="col-6">
-                    <h1>Easy Recipes</h1>
+                    <Link to="/">
+                        <h1>Easy Recipes</h1>
+                    </Link>
                 </div>
                 <div className="col-6">
-                    <a href="#">Add new</a> |<a href="#">Log in</a> |{" "}
-                    <a href="#">Register</a>
+                    <Link className="btn btn-primary" to="/add">
+                        Add new
+                    </Link>{" "}
+                    |<a href="#">Log in</a> | <a href="#">Register</a>
                 </div>
             </div>
             <div className="row">
                 <div className="col-4">
                     <h3>Filters</h3>
-                    <label>Search</label>
-                    <input />
+                    <label htmlFor="search">Search</label>
+                    <input id="search" />
                 </div>
                 <div className="col">
                     <Outlet />
