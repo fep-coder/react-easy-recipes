@@ -14,7 +14,18 @@ const recipesApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["Recipe"],
         }),
+        uploadImage: builder.mutation({
+            query: (image) => ({
+                url: "/api/recipes/upload",
+                method: "POST",
+                body: image,
+            }),
+        }),
     }),
 });
 
-export const { useGetRecipesQuery, useCreateRecipeMutation } = recipesApiSlice;
+export const {
+    useGetRecipesQuery,
+    useCreateRecipeMutation,
+    useUploadImageMutation,
+} = recipesApiSlice;

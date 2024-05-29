@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useGetCategoriesQuery } from "../slices/categoriesApiSlice";
-import { useCreateRecipeMutation } from "../slices/recipesApiSlice";
+import {
+    useCreateRecipeMutation,
+    useUploadImageMutation,
+} from "../slices/recipesApiSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +17,7 @@ function AddRecipe() {
 
     const { data: categories } = useGetCategoriesQuery();
     const [createRecipe] = useCreateRecipeMutation();
+    const [uploadImage] = useUploadImageMutation();
 
     const navigate = useNavigate();
 
@@ -39,6 +43,17 @@ function AddRecipe() {
     const uploadFileHandler = async (e) => {
         // console.log(e.target.files[0]);
         setImage(e.target.files[0].name);
+
+        const formData = new FormData();
+        formData.append("image", e.target.files[0]);
+
+        try {
+            const res = await uploadImage(formData).unwrap();
+            toast.success(res.message);
+            setImage(res.image);
+        } catch (error) {
+            toast.error(error.data.message);
+        }
     };
 
     return (

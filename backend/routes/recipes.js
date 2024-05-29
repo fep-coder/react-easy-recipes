@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const Recipe = require("../models/recipe");
+const multer = require("multer");
+const path = require("path");
 
 // GET /api/recipes - get all recipes
 router.get("/", async function (req, res, next) {
@@ -66,6 +68,41 @@ router.delete("/:id", async function (req, res, next) {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+});
+
+// POST /api/recipes/upload - upload image
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./frontend/public/images");
+    },
+    filename: function (req, file, cb) {
+        cb(null, new Date().getTime() + "-" + file.originalname);
+    },
+});
+
+function fileFilter(req, file, cb) {
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+        cb(null, true);
+    } else {
+        cb(new Error("Images only!"), false);
+    }
+}
+
+const upload = multer({ storage, fileFilter });
+
+const uploadSingle = upload.single("image");
+
+router.post("/upload", function (req, res, next) {
+    uploadSingle(req, res, function (error) {
+        if (error) {
+            return res.status(400).json({ message: error.message });
+        }
+
+        return res.status(200).json({
+            message: "File uploaded",
+            image: req.file.filename,
+        });
+    });
 });
 
 module.exports = router;
