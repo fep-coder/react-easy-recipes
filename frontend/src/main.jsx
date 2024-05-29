@@ -4,15 +4,19 @@ import "./index.css";
 import App from "./components/App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RecipeList from "./components/RecipeList";
+import { Provider } from "react-redux";
+import store from "./store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<App />}>
-                    <Route index element={<RecipeList />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<App />}>
+                        <Route index element={<RecipeList />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </Provider>
     </React.StrictMode>
 );
