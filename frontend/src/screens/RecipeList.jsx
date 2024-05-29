@@ -23,6 +23,7 @@ function RecipeList() {
                         </div>
                         <div className="col-8">
                             <h5 className="card-title">{recipe.name}</h5>
+                            <p>{recipe.description}</p>
                         </div>
                     </div>
                 ))

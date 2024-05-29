@@ -6,7 +6,7 @@ const recipesApiSlice = apiSlice.injectEndpoints({
             query: () => "/api/recipes",
             providesTags: ["Recipe"],
         }),
-        addRecipe: builder.mutation({
+        createRecipe: builder.mutation({
             query: (recipe) => ({
                 url: "/api/recipes",
                 method: "POST",
@@ -17,4 +17,4 @@ const recipesApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useGetRecipesQuery, useAddRecipeMutation } = recipesApiSlice;
+export const { useGetRecipesQuery, useCreateRecipeMutation } = recipesApiSlice;

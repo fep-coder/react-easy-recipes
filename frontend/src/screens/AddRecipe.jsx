@@ -1,21 +1,51 @@
 import { useState } from "react";
 import { useGetCategoriesQuery } from "../slices/categoriesApiSlice";
+import { useCreateRecipeMutation } from "../slices/recipesApiSlice";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function AddRecipe() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [body, setBody] = useState("");
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState("noimage.jpg");
     const [category, setCategory] = useState("");
     const [difficulty, setDifficulty] = useState("");
 
     const { data: categories } = useGetCategoriesQuery();
+    const [createRecipe] = useCreateRecipeMutation();
+
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await createRecipe({
+                name,
+                description,
+                body,
+                image,
+                category,
+                difficulty,
+            }).unwrap();
+            toast.success("Recipe created successfully");
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+            toast.error(error.data.message);
+        }
+    };
+
+    const uploadFileHandler = async (e) => {
+        // console.log(e.target.files[0]);
+        setImage(e.target.files[0].name);
+    };
 
     return (
         <div>
             <h2>Add Recipe</h2>
 
-            <form className="mb-5">
+            <form onSubmit={handleSubmit} className="mb-5">
                 <div className="mb-3">
                     <label>Name</label>
                     <input
@@ -46,8 +76,7 @@ function AddRecipe() {
                     <input
                         className="form-control"
                         type="file"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
+                        onChange={uploadFileHandler}
                     />
                 </div>
                 <div className="mb-3">
