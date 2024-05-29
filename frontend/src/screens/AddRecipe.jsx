@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useGetCategoriesQuery } from "../slices/categoriesApiSlice";
 
 function AddRecipe() {
     const [name, setName] = useState("");
@@ -7,6 +8,8 @@ function AddRecipe() {
     const [image, setImage] = useState("");
     const [category, setCategory] = useState("");
     const [difficulty, setDifficulty] = useState("");
+
+    const { data: categories } = useGetCategoriesQuery();
 
     return (
         <div>
@@ -55,9 +58,11 @@ function AddRecipe() {
                         onChange={(e) => setCategory(e.target.value)}
                     >
                         <option value="">Select a category</option>
-                        <option value="lunch">Lunch</option>
-                        <option value="dinner">Dinner</option>
-                        <option value="dessert">Dessert</option>
+                        {categories?.map((category) => (
+                            <option key={category._id} value={category._id}>
+                                {category.name}
+                            </option>
+                        ))}
                     </select>
                 </div>
                 <div className="mb-3">

@@ -10,6 +10,7 @@ const cors = require("cors");
 dbconnect();
 
 const recipesRouter = require("./routes/recipes");
+const categoriesRouter = require("./routes/categories");
 
 var app = express();
 
@@ -21,5 +22,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/api/recipes", recipesRouter);
+app.use("/api/categories", categoriesRouter);
 
 module.exports = app;
