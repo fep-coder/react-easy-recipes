@@ -1,5 +1,9 @@
 import { useDispatch } from "react-redux";
-import { setCategory, setSearchTerm } from "../slices/filterSlice";
+import {
+    setCategory,
+    setDifficulty,
+    setSearchTerm,
+} from "../slices/filterSlice";
 import { useGetCategoriesQuery } from "../slices/categoriesApiSlice";
 import { useState } from "react";
 
@@ -17,9 +21,15 @@ function Filters() {
                 ? [...selectedItems, value]
                 : selectedItems.filter((item) => item !== value)
         );
-    };
 
-    console.log(selectedItems);
+        dispatch(
+            setDifficulty(
+                e.target.checked
+                    ? [...selectedItems, value]
+                    : selectedItems.filter((item) => item !== value)
+            )
+        );
+    };
 
     return (
         <div className="col-4">
@@ -38,10 +48,9 @@ function Filters() {
                 <select
                     className="form-control"
                     id="category"
-                    defaultValue="all"
                     onChange={(e) => dispatch(setCategory(e.target.value))}
                 >
-                    <option value="all">All</option>
+                    <option value="">All</option>
                     {categories?.map((category) => (
                         <option key={category._id} value={category._id}>
                             {category.name}
@@ -51,6 +60,7 @@ function Filters() {
             </div>
 
             <div className="mt-3">
+                <label>Choose Difficulty</label>
                 {checkboxes.map((difficulty) => (
                     <div key={difficulty}>
                         <label htmlFor={difficulty}>

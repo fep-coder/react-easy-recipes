@@ -12,15 +12,20 @@ router.get("/", async function (req, res, next) {
 
     const category = req.query.category;
 
-    let recipes;
+    const difficulty = req.query.difficulty;
 
     try {
-        if (category != "all") {
-            recipes = await Recipe.find({ ...searchTerm, category });
-        } else {
-            recipes = await Recipe.find({ ...searchTerm });
+        let query = Recipe.find(searchTerm);
+
+        if (category) {
+            query = query.where("category", category);
         }
 
+        if (difficulty) {
+            query = query.where("difficulty").in(difficulty.split(","));
+        }
+
+        const recipes = await query.exec();
         res.status(200).json(recipes);
     } catch (error) {
         res.status(500).json({ message: error.message });

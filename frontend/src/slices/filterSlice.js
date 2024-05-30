@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     searchTerm: "",
-    category: "all",
+    category: "",
+    difficulty: [],
 };
 
 const filterSlice = createSlice({
@@ -15,9 +16,13 @@ const filterSlice = createSlice({
         setCategory: (state, action) => {
             state.category = action.payload;
         },
+        setDifficulty: (state, action) => {
+            state.difficulty = action.payload;
+        },
     },
 });
 
-export const { setSearchTerm, setCategory } = filterSlice.actions;
+export const { setSearchTerm, setCategory, setDifficulty } =
+    filterSlice.actions;
 
 export default filterSlice.reducer;
