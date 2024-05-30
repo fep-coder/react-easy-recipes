@@ -25,13 +25,13 @@ router.post("/login", async function (req, res, next) {
         res.cookie("jwt", token, {
             httpOnly: true,
             sameSite: "strict",
-            secure: false,
+            secure: process.env.NODE_ENV !== "development",
             maxAge: 86400000,
         });
 
         res.status(200).json(user);
     } else {
-        res.status(401).json({ message: "Invalid email or password" });
+        res.status(401).json({ message: "Invalid username or password" });
     }
 });
 
