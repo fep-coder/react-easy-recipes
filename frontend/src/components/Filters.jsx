@@ -1,10 +1,25 @@
 import { useDispatch } from "react-redux";
 import { setCategory, setSearchTerm } from "../slices/filterSlice";
 import { useGetCategoriesQuery } from "../slices/categoriesApiSlice";
+import { useState } from "react";
 
 function Filters() {
     const dispatch = useDispatch();
     const { data: categories } = useGetCategoriesQuery();
+
+    const checkboxes = ["easy", "medium", "hard"];
+    const [selectedItems, setSelectedItems] = useState([]);
+
+    const handleCheckboxChange = (e) => {
+        const value = e.target.value;
+        setSelectedItems(
+            e.target.checked
+                ? [...selectedItems, value]
+                : selectedItems.filter((item) => item !== value)
+        );
+    };
+
+    console.log(selectedItems);
 
     return (
         <div className="col-4">
@@ -18,7 +33,7 @@ function Filters() {
                 />
             </div>
 
-            <div>
+            <div className="mt-3">
                 <label htmlFor="category">Category</label>
                 <select
                     className="form-control"
@@ -33,6 +48,22 @@ function Filters() {
                         </option>
                     ))}
                 </select>
+            </div>
+
+            <div className="mt-3">
+                {checkboxes.map((difficulty) => (
+                    <div key={difficulty}>
+                        <label htmlFor={difficulty}>
+                            <input
+                                type="checkbox"
+                                id={difficulty}
+                                value={difficulty}
+                                onChange={handleCheckboxChange}
+                            />
+                            {difficulty}
+                        </label>
+                    </div>
+                ))}
             </div>
         </div>
     );
