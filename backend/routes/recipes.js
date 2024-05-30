@@ -6,8 +6,12 @@ const path = require("path");
 
 // GET /api/recipes - get all recipes
 router.get("/", async function (req, res, next) {
+    const keyword = req.query.keyword
+        ? { name: { $regex: req.query.keyword, $options: "i" } }
+        : {};
+
     try {
-        const recipes = await Recipe.find({});
+        const recipes = await Recipe.find({ ...keyword });
         res.status(200).json(recipes);
     } catch (error) {
         res.status(500).json({ message: error.message });

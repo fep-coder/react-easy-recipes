@@ -3,7 +3,7 @@ import Loader from "../components/Loader";
 import { useGetRecipesQuery } from "../slices/recipesApiSlice";
 
 function RecipeList() {
-    const { data: recipes, error, isLoading } = useGetRecipesQuery();
+    const { data: recipes, error, isLoading } = useGetRecipesQuery("pan");
 
     return (
         <div className="row position-relative">

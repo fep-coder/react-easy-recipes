@@ -13,7 +13,7 @@ function RecipeDetails() {
                 {isLoading ? (
                     <Loader />
                 ) : error ? (
-                    <p>Something went wrong</p>
+                    <p>{error.data.message}</p>
                 ) : (
                     <>
                         <img
