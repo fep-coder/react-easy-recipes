@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Filters from "./components/Filters";
 
 function App() {
     return (
@@ -19,12 +20,8 @@ function App() {
                 </div>
             </div>
             <div className="row">
-                <div className="col-4">
-                    <h3>Filters</h3>
-                    <label htmlFor="search">Search</label>
-                    <input id="search" />
-                </div>
                 <div className="col">
+                    <Filters />
                     <Outlet />
                 </div>
             </div>
