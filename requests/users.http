@@ -16,3 +16,6 @@ Content-Type: application/json
     "name": "john",
     "password": "pass"
 }
+
+### LOGOUT 
+POST http://localhost:3000/api/users/logout
