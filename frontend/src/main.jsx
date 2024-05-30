@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import AddRecipe from "./screens/AddRecipe";
 import RecipeDetails from "./screens/RecipeDetails";
+import PrivateRoute from "./components/PrivateRoute";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
@@ -16,11 +17,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index element={<RecipeList />} />
-                        <Route path="/add" element={<AddRecipe />} />
                         <Route
                             path="/recipes/:id"
                             element={<RecipeDetails />}
                         />
+                    </Route>
+                    <Route path="" element={<PrivateRoute />}>
+                        <Route path="/add" element={<AddRecipe />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
