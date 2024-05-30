@@ -3,10 +3,9 @@ var router = express.Router();
 const Recipe = require("../models/recipe");
 const multer = require("multer");
 const path = require("path");
-const loggedIn = require("../middleware/auth");
 
 // GET /api/recipes - get all recipes
-router.get("/", loggedIn, async function (req, res, next) {
+router.get("/", async function (req, res, next) {
     const searchTerm = req.query.searchTerm
         ? { name: { $regex: req.query.searchTerm, $options: "i" } }
         : {};
