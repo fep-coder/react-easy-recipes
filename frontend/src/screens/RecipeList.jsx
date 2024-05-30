@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useGetRecipesQuery } from "../slices/recipesApiSlice";
+import { useSelector } from "react-redux";
 
 function RecipeList() {
-    const { data: recipes, error, isLoading } = useGetRecipesQuery("pan");
+    const filter = useSelector((state) => state.search);
+    const {
+        data: recipes,
+        error,
+        isLoading,
+    } = useGetRecipesQuery(filter.searchTerm);
 
     return (
         <div className="row position-relative">

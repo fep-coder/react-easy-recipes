@@ -3,9 +3,9 @@ import { apiSlice } from "./apiSlice";
 const recipesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getRecipes: builder.query({
-            query: (keyword) => ({
+            query: (searchTerm) => ({
                 url: `/api/recipes`,
-                params: { keyword },
+                params: { searchTerm },
             }),
             providesTags: ["Recipe"],
         }),
