@@ -12,4 +12,15 @@ router.post("/register", async function (req, res, next) {
     }
 });
 
+// POST /api/users/login - login a user
+router.post("/login", async function (req, res, next) {
+    const user = await User.findOne({ name: req.body.name });
+
+    if (user && (await user.matchPassword(req.body.password))) {
+        res.status(200).json(user);
+    } else {
+        res.status(401).json({ message: "Invalid email or password" });
+    }
+});
+
 module.exports = router;
