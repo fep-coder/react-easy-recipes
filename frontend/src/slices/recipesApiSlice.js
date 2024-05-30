@@ -21,6 +21,10 @@ const recipesApiSlice = apiSlice.injectEndpoints({
                 body: image,
             }),
         }),
+        getRecipeDetails: builder.query({
+            query: (id) => `/api/recipes/${id}`,
+            providesTags: ["Recipe"],
+        }),
     }),
 });
 
@@ -28,4 +32,5 @@ export const {
     useGetRecipesQuery,
     useCreateRecipeMutation,
     useUploadImageMutation,
+    useGetRecipeDetailsQuery,
 } = recipesApiSlice;

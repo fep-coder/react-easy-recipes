@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     return (
-        <div className="container mt-3">
+        <div className="container mt-3 mb-5">
             <div className="row">
                 <div className="col-6">
                     <Link to="/">
