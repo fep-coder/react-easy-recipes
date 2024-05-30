@@ -4,15 +4,11 @@ import { useGetRecipesQuery } from "../slices/recipesApiSlice";
 import { useSelector } from "react-redux";
 
 function RecipeList() {
-    const filter = useSelector((state) => state.search);
-    const {
-        data: recipes,
-        error,
-        isLoading,
-    } = useGetRecipesQuery(filter.searchTerm);
+    const filter = useSelector((state) => state.filter);
+    const { data: recipes, error, isLoading } = useGetRecipesQuery(filter);
 
     return (
-        <div className="row position-relative">
+        <div className="col position-relative">
             {isLoading ? (
                 <Loader />
             ) : error ? (

@@ -10,8 +10,17 @@ router.get("/", async function (req, res, next) {
         ? { name: { $regex: req.query.searchTerm, $options: "i" } }
         : {};
 
+    const category = req.query.category;
+
+    let recipes;
+
     try {
-        const recipes = await Recipe.find({ ...searchTerm });
+        if (category != "all") {
+            recipes = await Recipe.find({ ...searchTerm, category });
+        } else {
+            recipes = await Recipe.find({ ...searchTerm });
+        }
+
         res.status(200).json(recipes);
     } catch (error) {
         res.status(500).json({ message: error.message });

@@ -20,10 +20,8 @@ function App() {
                 </div>
             </div>
             <div className="row">
-                <div className="col">
-                    <Filters />
-                    <Outlet />
-                </div>
+                <Filters />
+                <Outlet />
             </div>
             <ToastContainer />
         </div>

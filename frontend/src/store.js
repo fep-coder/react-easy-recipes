@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./slices/apiSlice";
-import searchSlice from "./slices/searchSlice";
+import filterSlice from "./slices/filterSlice";
 const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
-        search: searchSlice,
+        filter: filterSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiSlice.middleware),
