@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { useLoginMutation } from "../slices/usersApiSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useRegisterMutation } from "../slices/usersApiSlice";
 import { useNavigate } from "react-router-dom";
-import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
-function Login() {
+function Register() {
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const { userInfo } = useSelector((state) => state.auth);
 
-    const [login, { isLoading }] = useLoginMutation();
+    const [register] = useRegisterMutation();
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,10 +25,15 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (password !== confirmPassword) {
+            toast.error("Passwords do not match");
+            return;
+        }
+
         try {
-            const userData = await login({ name, password }).unwrap();
-            dispatch(setCredentials(userData));
-            navigate("/");
+            await register({ name, email, password }).unwrap();
+            toast.success("Registration successful");
+            navigate("/login");
         } catch (error) {
             toast.error(error.data.message);
         }
@@ -36,7 +41,7 @@ function Login() {
 
     return (
         <div className="col-8">
-            <h1 className="text-center">Login</h1>
+            <h1 className="text-center">Register</h1>
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -51,6 +56,17 @@ function Login() {
                 </div>
 
                 <div className="mb-3">
+                    <label className="form-label">Email</label>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        className="form-control"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+
+                <div className="mb-3">
                     <label className="form-label">Password</label>
                     <input
                         type="password"
@@ -61,12 +77,21 @@ function Login() {
                     />
                 </div>
 
-                <button disabled={isLoading} className="btn btn-primary">
-                    Login
-                </button>
+                <div className="mb-3">
+                    <label className="form-label">Confirm Password</label>
+                    <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        className="form-control"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                </div>
+
+                <button className="btn btn-primary">Register</button>
             </form>
         </div>
     );
 }
 
-export default Login;
+export default Register;

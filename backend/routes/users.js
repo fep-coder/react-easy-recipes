@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const loggedIn = require("../middleware/auth");
 
 // POST /api/users/register - register a new user
 router.post("/register", async function (req, res, next) {
@@ -39,7 +40,7 @@ router.post("/login", async function (req, res, next) {
 });
 
 // POST /api/users/logout - logout a user
-router.post("/logout", function (req, res, next) {
+router.post("/logout", loggedIn, function (req, res, next) {
     res.clearCookie("jwt");
     res.status(200).json({ message: "You have been logged out" });
 });

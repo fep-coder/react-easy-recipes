@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const Recipe = require("../models/recipe");
 const multer = require("multer");
-const path = require("path");
+const loggedIn = require("../middleware/auth");
 
 // GET /api/recipes - get all recipes
 router.get("/", async function (req, res, next) {
@@ -47,7 +47,7 @@ router.get("/:id", async function (req, res, next) {
 });
 
 // POST /api/recipes - create new recipe
-router.post("/", async function (req, res, next) {
+router.post("/", loggedIn, async function (req, res, next) {
     try {
         req.body.slug = req.body.name.trim().replace(/ /g, "-").toLowerCase();
         await Recipe.create(req.body);
@@ -58,7 +58,7 @@ router.post("/", async function (req, res, next) {
 });
 
 // PUT /api/recipes/:id - update one recipe
-router.put("/:id", async function (req, res, next) {
+router.put("/:id", loggedIn, async function (req, res, next) {
     try {
         const recipe = await Recipe.findById(req.params.id);
         if (!recipe) {
@@ -74,7 +74,7 @@ router.put("/:id", async function (req, res, next) {
 });
 
 // DELETE /api/recipes/:id - delete one recipe
-router.delete("/:id", async function (req, res, next) {
+router.delete("/:id", loggedIn, async function (req, res, next) {
     try {
         const recipe = await Recipe.findById(req.params.id);
         if (!recipe) {
@@ -110,7 +110,7 @@ const upload = multer({ storage, fileFilter });
 
 const uploadSingle = upload.single("image");
 
-router.post("/upload", function (req, res, next) {
+router.post("/upload", loggedIn, function (req, res, next) {
     uploadSingle(req, res, function (error) {
         if (error) {
             return res.status(400).json({ message: error.message });

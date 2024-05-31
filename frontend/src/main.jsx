@@ -10,6 +10,7 @@ import AddRecipe from "./screens/AddRecipe";
 import RecipeDetails from "./screens/RecipeDetails";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./screens/Login";
+import Register from "./screens/Register";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                             element={<RecipeDetails />}
                         />
                         <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
                         <Route path="" element={<PrivateRoute />}>
                             <Route path="/add" element={<AddRecipe />} />
                         </Route>
