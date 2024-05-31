@@ -16,7 +16,10 @@ function App() {
                     <Link className="btn btn-primary" to="/add">
                         Add new
                     </Link>{" "}
-                    |<a href="#">Log in</a> | <a href="#">Register</a>
+                    <Link className="btn btn-info" to="/login">
+                        Log in
+                    </Link>{" "}
+                    | <a href="#">Register</a>
                 </div>
             </div>
             <div className="row">

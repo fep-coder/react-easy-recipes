@@ -29,7 +29,10 @@ router.post("/login", async function (req, res, next) {
             maxAge: 86400000,
         });
 
-        res.status(200).json(user);
+        res.status(200).json({
+            _id: user._id,
+            name: user.name,
+        });
     } else {
         res.status(401).json({ message: "Invalid username or password" });
     }

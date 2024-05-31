@@ -75,7 +75,7 @@ function AddRecipe() {
     };
 
     return (
-        <div>
+        <div className="col">
             <h2>Add Recipe</h2>
 
             <form onSubmit={handleSubmit} className="mb-5">

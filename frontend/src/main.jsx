@@ -9,6 +9,7 @@ import store from "./store";
 import AddRecipe from "./screens/AddRecipe";
 import RecipeDetails from "./screens/RecipeDetails";
 import PrivateRoute from "./components/PrivateRoute";
+import Login from "./screens/Login";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
@@ -21,9 +22,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                             path="/recipes/:id"
                             element={<RecipeDetails />}
                         />
-                    </Route>
-                    <Route path="" element={<PrivateRoute />}>
-                        <Route path="/add" element={<AddRecipe />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="" element={<PrivateRoute />}>
+                            <Route path="/add" element={<AddRecipe />} />
+                        </Route>
                     </Route>
                 </Routes>
             </BrowserRouter>
