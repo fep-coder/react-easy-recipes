@@ -32,6 +32,9 @@ function RecipeList() {
                                     <span className="badge bg-success">
                                         {recipe.author}
                                     </span>
+                                    <span className="badge bg-info mx-1">
+                                        {recipe.difficulty}
+                                    </span>
                                 </h5>
                                 <p>{recipe.description}</p>
                                 <Link
