@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGetCategoriesQuery } from "../slices/categoriesApiSlice";
 import {
     useCreateRecipeMutation,
@@ -7,8 +7,10 @@ import {
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import JoditEditor from "jodit-react";
 
 function AddRecipe() {
+    const editor = useRef(null);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [body, setBody] = useState("");
@@ -98,10 +100,15 @@ function AddRecipe() {
                 </div>
                 <div className="mb-3">
                     <label>Body</label>
-                    <textarea
+                    {/* <textarea
                         className="form-control"
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
+                    /> */}
+                    <JoditEditor
+                        ref={editor}
+                        value={body}
+                        onChange={(newContent) => setBody(newContent)}
                     />
                 </div>
                 <div className="mb-3 position-relative">

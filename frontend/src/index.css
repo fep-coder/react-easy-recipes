@@ -3,3 +3,7 @@ div.spinner-border {
     top: 50%;
     left: 50%;
 }
+
+.jodit-workplace {
+    min-height: 400px !important;
+}
