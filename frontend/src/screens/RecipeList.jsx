@@ -27,10 +27,15 @@ function RecipeList() {
                                 </Link>
                             </div>
                             <div className="col-8">
-                                <h5 className="card-title">{recipe.name}</h5>
+                                <h5 className="card-title">
+                                    {recipe.name}{" "}
+                                    <span className="badge bg-success">
+                                        {recipe.author}
+                                    </span>
+                                </h5>
                                 <p>{recipe.description}</p>
                                 <Link
-                                    className="btn btn-primary mt-2"
+                                    className="btn btn-warning mt-2"
                                     to={`/recipes/${recipe._id}`}
                                 >
                                     View Recipe

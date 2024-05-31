@@ -17,6 +17,12 @@ function RecipeDetails() {
             ) : (
                 <>
                     <h1>{recipe.name}</h1>
+                    <p>
+                        <b>Author: </b> {recipe.author}
+                    </p>
+                    <p>
+                        <b>Difficulty: </b> {recipe.difficulty}
+                    </p>
                     <img
                         className="img-fluid mb-3 w-50"
                         src={`/images/${recipe.image}`}

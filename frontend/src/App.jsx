@@ -26,7 +26,7 @@ function App() {
                     </Link>
                 </div>
                 <div className="col-6">
-                    <Link className="btn btn-primary" to="/add">
+                    <Link className="btn btn-warning" to="/add">
                         Add new recipe
                     </Link>{" "}
                 </div>
