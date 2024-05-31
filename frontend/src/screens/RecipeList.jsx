@@ -15,13 +15,12 @@ function RecipeList() {
                 <p>Something went wrong...</p>
             ) : (
                 <>
-                    <h1 className="text-center">Browse Recipes</h1>
                     {recipes.map((recipe) => (
-                        <div className="row mb-3" key={recipe._id}>
+                        <div className="row mb-5" key={recipe._id}>
                             <div className="col-4">
                                 <Link to={`/recipes/${recipe._id}`}>
                                     <img
-                                        className="img-fluid"
+                                        className="img-fluid px-3"
                                         src={`/images/${recipe.image}`}
                                         alt={recipe.name}
                                     />
@@ -30,7 +29,10 @@ function RecipeList() {
                             <div className="col-8">
                                 <h5 className="card-title">{recipe.name}</h5>
                                 <p>{recipe.description}</p>
-                                <Link to={`/recipes/${recipe._id}`}>
+                                <Link
+                                    className="btn btn-primary mt-2"
+                                    to={`/recipes/${recipe._id}`}
+                                >
                                     View Recipe
                                 </Link>
                             </div>

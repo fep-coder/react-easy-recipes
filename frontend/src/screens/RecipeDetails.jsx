@@ -16,18 +16,18 @@ function RecipeDetails() {
                 <p>{error.data.message}</p>
             ) : (
                 <>
+                    <h1>{recipe.name}</h1>
                     <img
-                        className="img-fluid"
+                        className="img-fluid mb-3 w-50"
                         src={`/images/${recipe.image}`}
                         alt={recipe.name}
                     />
-                    <h1>{recipe.name}</h1>
                     <p>{recipe.description}</p>
                     <div>{HTMLReactParser(recipe.body)}</div>
                 </>
             )}
-            <Link to="/" className="btn btn-info">
-                Back to List
+            <Link to="/" className="btn btn-info mt-3">
+                Back to all recipes
             </Link>
         </div>
     );

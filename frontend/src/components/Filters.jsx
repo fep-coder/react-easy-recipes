@@ -59,12 +59,13 @@ function Filters() {
                 </select>
             </div>
 
-            <div className="mt-3">
+            <div className="mt-3 form-check">
                 <label>Choose Difficulty</label>
                 {checkboxes.map((difficulty) => (
                     <div key={difficulty}>
                         <label htmlFor={difficulty}>
                             <input
+                                className="form-check-input"
                                 type="checkbox"
                                 id={difficulty}
                                 value={difficulty}

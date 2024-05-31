@@ -7,3 +7,11 @@ div.spinner-border {
 .jodit-workplace {
     min-height: 400px !important;
 }
+
+div.form-check {
+    padding-left: 0 !important;
+}
+
+div.form-check > div {
+    padding-left: 25px !important;
+}
