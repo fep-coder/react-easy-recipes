@@ -50,6 +50,7 @@ router.get("/:id", async function (req, res, next) {
 router.post("/", loggedIn, async function (req, res, next) {
     try {
         req.body.slug = req.body.name.trim().replace(/ /g, "-").toLowerCase();
+        req.body.user = req.user._id;
         await Recipe.create(req.body);
         res.status(201).json({ message: "Recipe created" });
     } catch (error) {

@@ -35,6 +35,11 @@ const recipeSchema = new Schema(
             enum: ["easy", "medium", "hard"],
             required: [true, "Recipe difficulty is required"],
         },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
     },
     { timestamps: true }
 );
